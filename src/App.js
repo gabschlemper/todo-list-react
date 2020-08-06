@@ -19,10 +19,6 @@ function App() {
   const [todo, setTodo] = useState(todoInicial);
   const [nextTask, setNextTask] = useState("");
 
-  const listItems = todo.map((task) =>
-    <li key={task.id}>{task.title}</li>
-  );
-
   return (
     <div className="main">
       <header>
@@ -31,7 +27,22 @@ function App() {
       </header>
       <div className="content">
         <ul>
-          {listItems}
+          {todo.map((task) =>
+            <li key={task.id}>
+              {task.title}
+              <button
+                onClick={e => {
+                  const index = todo.findIndex(item => item.id === task.id);
+                  const newTodo = [...todo]
+                  newTodo[index] = {
+                    ...newTodo[index],
+                    trash: true
+                  }
+                  setTodo(newTodo)
+                }}
+                >Remove</button>
+            </li>
+          )}
         </ul>
         <input
           type=""

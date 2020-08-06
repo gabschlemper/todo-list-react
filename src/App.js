@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
+import { MdHighlightOff, MdCheckBoxOutlineBlank, MdCheckBox } from 'react-icons/md';
 
 function App() {
   const todoInicial = [
@@ -29,7 +30,10 @@ function App() {
         <ul>
           {todo.filter(item => item.trash === false).map((task) =>
             <li key={task.id} className={task.completed ? 'completed' : ''}>
-              <button
+              {task.completed ? (
+                <MdCheckBox/> 
+              ) : (
+                <MdCheckBoxOutlineBlank
                 onClick={e => {
                   const index = todo.findIndex(item => item.id === task.id);
                   const newTodo = [...todo]
@@ -39,9 +43,10 @@ function App() {
                   }
                   setTodo(newTodo)
                 }}
-                >Completed</button>
+                />
+              )}
               {task.title}
-              <button
+              <MdHighlightOff
                 onClick={e => {
                   const index = todo.findIndex(item => item.id === task.id);
                   const newTodo = [...todo]
@@ -51,7 +56,7 @@ function App() {
                   }
                   setTodo(newTodo)
                 }}
-                >Remove</button>
+              />
             </li>
           )}
         </ul>

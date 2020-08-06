@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 
 function App() {
+  const todoInicial = [{
+  id: 1,
+  title: "learn english",
+  completed: false,
+  trash: false, 
+}]
+  const [todo, setTodo] = useState(todoInicial);
+  console.log('todo', todo);
+
   return (
     <div className="main">
       <header>
@@ -10,8 +19,6 @@ function App() {
       </header>
       <div className="content">
         <ul>
-          <li>task 1</li>
-          <li>task 2</li>
         </ul>
         <input/>
       </div>

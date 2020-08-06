@@ -27,7 +27,7 @@ function App() {
       </header>
       <div className="content">
         <ul>
-          {todo.map((task) =>
+          {todo.filter(item => item.trash === false).map((task) =>
             <li key={task.id}>
               {task.title}
               <button

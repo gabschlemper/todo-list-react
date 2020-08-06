@@ -17,7 +17,7 @@ function App() {
     }
   ];
   const [todo, setTodo] = useState(todoInicial);
-  const [nextTask, setNextTask] = useState("q");
+  const [nextTask, setNextTask] = useState("");
 
   const listItems = todo.map((task) =>
     <li key={task.id}>{task.title}</li>
@@ -37,20 +37,18 @@ function App() {
           type=""
           value={nextTask}
           onChange={e => setNextTask(e.target.value)}
-        />
-        <button
-          onClick={()=> {
-            const newTask = {
-              id: 3,
-              title: nextTask,
-              completed: false,
-              trash: false,
+          onKeyPress={e => {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              const newTask = {
+                id: 3,
+                title: nextTask,
+                completed: false,
+                trash: false,
+              }
+              setTodo([...todo, newTask])
             }
-            setTodo([...todo, newTask])
           }}
-        >
-          +
-        </button>
+        />
       </div>
     </div>
   );

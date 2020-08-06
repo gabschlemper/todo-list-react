@@ -10,16 +10,17 @@ function App() {
       trash: false, 
     },
     {
-      id: 1,
+      id: 2,
       title: "clean the house",
       completed: false,
       trash: false, 
     }
   ];
   const [todo, setTodo] = useState(todoInicial);
-  
-  const listItems = todo.map((objeto) =>
-    <li>{objeto.title}</li>
+  const [nextTask, setNextTask] = useState("q");
+
+  const listItems = todo.map((task) =>
+    <li key={task.id}>{task.title}</li>
   );
 
   return (
@@ -32,7 +33,24 @@ function App() {
         <ul>
           {listItems}
         </ul>
-        <input/>
+        <input
+          type=""
+          value={nextTask}
+          onChange={e => setNextTask(e.target.value)}
+        />
+        <button
+          onClick={()=> {
+            const newTask = {
+              id: 3,
+              title: nextTask,
+              completed: false,
+              trash: false,
+            }
+            setTodo([...todo, newTask])
+          }}
+        >
+          +
+        </button>
       </div>
     </div>
   );

@@ -28,7 +28,18 @@ function App() {
       <div className="content">
         <ul>
           {todo.filter(item => item.trash === false).map((task) =>
-            <li key={task.id}>
+            <li key={task.id} className={task.completed ? 'completed' : ''}>
+              <button
+                onClick={e => {
+                  const index = todo.findIndex(item => item.id === task.id);
+                  const newTodo = [...todo]
+                  newTodo[index] = {
+                    ...newTodo[index],
+                    completed: true
+                  }
+                  setTodo(newTodo)
+                }}
+                >Completed</button>
               {task.title}
               <button
                 onClick={e => {

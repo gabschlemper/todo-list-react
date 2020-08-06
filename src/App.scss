@@ -30,6 +30,9 @@ body {
         li {
           list-style-type: none;
           padding-bottom: 10px;
+          &.completed {
+            color: #ccc;
+          }
         }
       }
       input {

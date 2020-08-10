@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.scss';
 import { MdHighlightOff, MdCheckBoxOutlineBlank, MdCheckBox } from 'react-icons/md';
+import moment from 'moment';
 
 function App() {
   const todoInicial = [
@@ -23,7 +24,7 @@ function App() {
   return (
     <div className="main">
       <header>
-        <p>{new Date().toString()}</p>
+        <p>{moment().format("MMM Do YYYY")}</p>
         <h1>My Tasks</h1>
       </header>
       <div className="content">
@@ -31,9 +32,9 @@ function App() {
           {todo.filter(item => item.trash === false).map((task) =>
             <li key={task.id} className={task.completed ? 'completed' : ''}>
               {task.completed ? (
-                <MdCheckBox/> 
+                <MdCheckBox className='checked'/> 
               ) : (
-                <MdCheckBoxOutlineBlank
+                <MdCheckBoxOutlineBlank className='unchecked'
                 onClick={e => {
                   const index = todo.findIndex(item => item.id === task.id);
                   const newTodo = [...todo]
@@ -46,7 +47,7 @@ function App() {
                 />
               )}
               {task.title}
-              <MdHighlightOff
+              <MdHighlightOff className='trash'
                 onClick={e => {
                   const index = todo.findIndex(item => item.id === task.id);
                   const newTodo = [...todo]
@@ -61,6 +62,7 @@ function App() {
           )}
         </ul>
         <input
+          placeholder="New task..."
           type=""
           value={nextTask}
           onChange={e => setNextTask(e.target.value)}
